@@ -104,40 +104,8 @@ export const menuItems = [
     link: "#",
     child: [
       {
-        childtitle: "Signin One",
-        childlink: "/",
-      },
-      {
         childtitle: "Signin Two",
         childlink: "/login2",
-      },
-      {
-        childtitle: "Signin Three",
-        childlink: "/login3",
-      },
-      {
-        childtitle: "Signup One",
-        childlink: "/reg",
-      },
-      {
-        childtitle: "Signup Two",
-        childlink: "/reg2",
-      },
-      {
-        childtitle: "Signup Three",
-        childlink: "/reg3",
-      },
-      {
-        childtitle: "Forget Password One",
-        childlink: "/forgot-password",
-      },
-      {
-        childtitle: "Forget Password Two",
-        childlink: "/forgot-password2",
-      },
-      {
-        childtitle: "Forget Password Three",
-        childlink: "/forgot-password3",
       },
       {
         childtitle: "Lock Screen One",
