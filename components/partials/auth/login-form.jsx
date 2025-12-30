@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+"use client";
+
+import { useState } from "react";
 import Textinput from "@/components/ui/Textinput";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -6,71 +8,85 @@ import * as yup from "yup";
 import { useRouter } from "next/navigation";
 import Checkbox from "@/components/ui/Checkbox";
 import Link from "next/link";
-import { useSelector, useDispatch } from "react-redux";
-import { handleLogin } from "./store";
 import { toast } from "react-toastify";
-const schema = yup
-  .object({
-    email: yup.string().email("Invalid email").required("Email is Required"),
-    password: yup.string().required("Password is Required"),
-  })
-  .required();
+
+const schema = yup.object({
+  username: yup.string().required("Username is required"),
+  password: yup.string().required("Password is required"),
+});
+
 const LoginForm = () => {
-  const dispatch = useDispatch();
-  const { users } = useSelector((state) => state.auth);
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const [checked, setChecked] = useState(false);
+
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm({
     resolver: yupResolver(schema),
-    //
     mode: "all",
   });
-  const router = useRouter();
-  const onSubmit = (data) => {
-    const user = users.find(
-      (user) => user.email === data.email && user.password === data.password
-    );
-    if (user) {
-      dispatch(handleLogin(true));
+
+  const onSubmit = async (data) => {
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: data.username,
+          password: data.password,
+        }),
+      });
+
+      const result = await res.json();
+
+      if (!res.ok) {
+        throw new Error(result.error || "Login failed");
+      }
+
+      toast.success("Login successful", {
+        position: "top-right",
+        autoClose: 1200,
+      });
+
+      // redirect after login
       setTimeout(() => {
-        router.push("/analytics");
-      }, 1500);
-    } else {
-      toast.error("Invalid credentials", {
+        router.push("/analytics"); // or /dashboard
+      }, 800);
+    } catch (err) {
+      toast.error(err.message, {
         position: "top-right",
         autoClose: 1500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
       });
+    } finally {
+      setLoading(false);
     }
   };
 
-  const [checked, setChecked] = useState(false);
-
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 ">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       <Textinput
-        name="email"
-        label="email"
-        defaultValue="dashcode@gmail.com"
-        type="email"
+        name="username"
+        label="Username"
+        type="text"
         register={register}
-        error={errors?.email}
+        error={errors.username}
       />
+
       <Textinput
         name="password"
-        label="passwrod"
+        label="Password"
         type="password"
-        defaultValue="dashcode"
         register={register}
         error={errors.password}
       />
+
       <div className="flex justify-between">
         <Checkbox
           value={checked}
@@ -81,11 +97,16 @@ const LoginForm = () => {
           href="/forgot-password"
           className="text-sm text-slate-800 dark:text-slate-400 leading-6 font-medium"
         >
-          Forgot Password?{" "}
+          Forgot Password?
         </Link>
       </div>
 
-      <button className="btn btn-dark block w-full text-center">Sign in</button>
+      <button
+        className="btn btn-dark block w-full text-center"
+        disabled={loading}
+      >
+        {loading ? "Signing in..." : "Sign in"}
+      </button>
     </form>
   );
 };

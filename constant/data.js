@@ -90,6 +90,18 @@ export const menuItems = [
       },
     ]
   },
+   {
+    title: "Logout",
+    icon: "heroicons-outline:cog",
+    link: "Logout",
+    child: [
+      {
+        childtitle: "Page lagout",  
+        childlink: "page-logout",
+        childicon: "heroicons-outline:user-circle",
+      },
+    ]
+  },
 ];
 
 export const topMenu = [

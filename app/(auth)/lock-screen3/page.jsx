@@ -73,7 +73,7 @@ const LockScreen3 = () => {
           </div>
         </div>
         <div className="auth-footer3 text-white py-5 px-5 text-xl w-full">
-          Unlock your Project performance
+          Unlock your Project performancess
         </div>
       </div>
     </div>

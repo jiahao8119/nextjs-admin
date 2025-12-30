@@ -77,7 +77,7 @@ const Login2 = () => {
               <div>
                 <div className="black-500-title max-w-[525px] mx-auto pb-20 text-center">
                   Unlock your Project{" "}
-                  <span className="text-white font-bold">performance</span>
+                  <span className="text-white font-bold">performancess</span>
                 </div>
               </div>
             </div>

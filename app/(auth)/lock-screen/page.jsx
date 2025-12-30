@@ -27,7 +27,7 @@ const LockScreen = () => {
             <h4>
               Unlock your Project{" "}
               <span className="text-slate-800 dark:text-slate-400 font-bold">
-                performance
+                performancesss
               </span>
             </h4>
           </div>
