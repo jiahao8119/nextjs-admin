@@ -1,397 +1,94 @@
 export const menuItems = [
-  {
-    isHeadr: true,
-    title: "menu",
-  },
+  // {
+  //   isHeadr: true,
+  //   title: "menu",
+  // },
 
   {
     title: "Dashboard",
     icon: "heroicons-outline:home",
-    isOpen: true,
-    isHide: true,
-    child: [
-      {
-        childtitle: "Analytics Dashboard",
-        childlink: "analytics",
-      },
-      {
-        childtitle: "Ecommerce Dashboard",
-        childlink: "ecommerce",
-      },
-      {
-        childtitle: "Project  Dashbaord",
-        childlink: "project",
-      },
-      {
-        childtitle: " CRM Dashbaord",
-        childlink: "crm",
-      },
-      {
-        childtitle: "Banking Dashboard",
-        childlink: "banking",
-      },
-    ],
+    link: "dashboard",
   },
   {
-    title: "changelog",
-    icon: "heroicons:arrow-trending-up",
-    link: "changelog",
-    isHide: false,
-    badge: "1.0.0",
-  },
-  {
-    isHeadr: true,
-    title: "apps",
-  },
-
-  {
-    title: "Chat",
-    isHide: true,
-    icon: "heroicons-outline:chat",
-    link: "chat",
-  },
-
-  {
-    title: "Email",
-    isHide: true,
-    icon: "heroicons-outline:mail",
-    link: "email",
-  },
-
-  {
-    title: "Kanban",
-    isHide: true,
-    icon: "heroicons-outline:view-boards",
-    link: "kanban",
-  },
-  {
-    title: "Calender",
-    isHide: true,
-    icon: "heroicons-outline:calendar",
-    link: "calender",
-  },
-
-  {
-    title: "Todo",
-    isHide: true,
-    icon: "heroicons-outline:clipboard-check",
-    link: "todo",
-  },
-
-  {
-    title: "Projects",
-    icon: "heroicons-outline:document",
-    link: "#",
-    isHide: true,
-    child: [
-      {
-        childtitle: "Projects",
-        childlink: "projects",
-      },
-      {
-        childtitle: "Project Details",
-        childlink: "project-details",
-      },
-    ],
-  },
-  {
-    isHeadr: true,
-    title: "Pages",
-  },
-  {
-    title: "Authentication",
-    icon: "heroicons-outline:lock-closed",
-    link: "#",
-    child: [
-      {
-        childtitle: "Signin Two",
-        childlink: "/login2",
-      },
-      {
-        childtitle: "Lock Screen One",
-        childlink: "/lock-screen",
-      },
-      {
-        childtitle: "Lock Screen Two",
-        childlink: "/lock-screen2",
-      },
-      {
-        childtitle: "Lock Screen Three",
-        childlink: "/lock-screen3",
-      },
-    ],
-  },
-  {
-    title: "Utility",
-    icon: "heroicons-outline:view-boards",
-    link: "#",
-    isHide: false,
-    child: [
-      {
-        childtitle: "Invoice",
-        childlink: "invoice",
-      },
-      {
-        childtitle: "Pricing",
-        childlink: "pricing",
-      },
-      // {
-      //   childtitle: "Testimonial",
-      //   childlink: "testimonial",
-      // },
-      {
-        childtitle: "FAQ",
-        childlink: "faq",
-      },
-      {
-        childtitle: "Blog",
-        childlink: "blog",
-      },
-      {
-        childtitle: "Blank page",
-        childlink: "blank-page",
-      },
-      {
-        childtitle: "Prfoile",
-        childlink: "profile",
-      },
-      {
-        childtitle: "Settings",
-        childlink: "settings",
-      },
-      {
-        childtitle: "404 page",
-        childlink: "error-page",
-      },
-
-      {
-        childtitle: "Coming Soon",
-        childlink: "coming-soon",
-      },
-      {
-        childtitle: "Under Maintanance page",
-        childlink: "under-construction",
-      },
-    ],
-  },
-  {
-    isHeadr: true,
-    title: "Elements",
-  },
-  {
-    title: "Widgets",
-    icon: "heroicons-outline:view-grid-add",
-    link: "#",
-    child: [
-      {
-        childtitle: "Basic",
-        childlink: "basic",
-      },
-      {
-        childtitle: "Statistic",
-        childlink: "statistic",
-      },
-    ],
-  },
-  {
-    title: "Components",
+    title: "Inventory",
     icon: "heroicons-outline:collection",
-    link: "#",
     child: [
-      {
-        childtitle: "Typography",
-        childlink: "typography",
-      },
-      {
-        childtitle: "Colors",
-        childlink: "colors",
-      },
-      {
-        childtitle: "Alert",
-        childlink: "alert",
-      },
-      {
-        childtitle: "Button",
-        childlink: "button",
-      },
-      {
-        childtitle: "Card",
-        childlink: "card",
-      },
-      {
-        childtitle: "Carousel",
-        childlink: "carousel",
-      },
-      {
-        childtitle: "Dropdown",
-        childlink: "dropdown",
-      },
-
-      {
-        childtitle: "Modal",
-        childlink: "modal",
-      },
-      {
-        childtitle: "Progress bar",
-        childlink: "progress-bar",
-      },
-      {
-        childtitle: "Placeholder",
-        childlink: "placeholder",
-      },
-      {
-        childtitle: "Tab & Accordion",
-        childlink: "tab-accordion",
-      },
-      {
-        childtitle: "Badges",
-        childlink: "badges",
-      },
-      {
-        childtitle: "Paginatins",
-        childlink: "paginations",
-      },
-      {
-        childtitle: "Video",
-        childlink: "video",
-      },
-      {
-        childtitle: "Tooltip & Popover",
-        childlink: "tooltip-popover",
-      },
-    ],
+        {
+            childtitle: "Products",
+            childlink: "inventory/products",
+            childicon: "heroicons-outline:archive",
+        },
+        {
+            childtitle: "Reports",
+            childlink: "inventory/reports",
+            childicon: "heroicons-outline:chart-bar",
+        },
+    ]
   },
   {
-    title: "Forms",
-    icon: "heroicons-outline:clipboard-list",
-    link: "#",
+    title: "Sales System",
+    icon: "heroicons-outline:shopping-cart",
     child: [
-      {
-        childtitle: "Input",
-        childlink: "input",
-      },
-      {
-        childtitle: "Input group",
-        childlink: "input-group",
-      },
-      {
-        childtitle: "Input layout",
-        childlink: "input-layout",
-      },
-      {
-        childtitle: "Form validation",
-        childlink: "form-validation",
-      },
-      {
-        childtitle: "Wizard",
-        childlink: "form-wizard",
-      },
-      {
-        childtitle: "Input mask",
-        childlink: "input-mask",
-      },
-      {
-        childtitle: "File input",
-        childlink: "file-input",
-      },
-      {
-        childtitle: "Form repeater",
-        childlink: "form-repeater",
-      },
-      {
-        childtitle: "Textarea",
-        childlink: "textarea",
-      },
-      {
-        childtitle: "Checkbox",
-        childlink: "checkbox",
-      },
-      {
-        childtitle: "Radio button",
-        childlink: "radio-button",
-      },
-      {
-        childtitle: "Switch",
-        childlink: "switch",
-      },
-      {
-        childtitle: "Select & Vue select",
-        childlink: "select",
-      },
-      {
-        childtitle: "Date time picker",
-        childlink: "date-time-picker",
-      },
-    ],
+        {
+            childtitle: "New Sale",
+            childlink: "sales/new",
+            childicon: "heroicons-outline:plus-circle",
+        },
+        {
+            childtitle: "Sales History",
+            childlink: "sales/history",
+            childicon: "heroicons-outline:clock",
+        },
+    ]
   },
   {
-    title: "Table",
-    icon: "heroicons-outline:table",
-    link: "#",
-    child: [
-      {
-        childtitle: "Basic Table",
-        childlink: "table-basic",
-      },
-      {
-        childtitle: "React Table",
-        childlink: "react-table",
-      },
-    ],
+    title: "Orders",
+    icon: "heroicons-outline:archive-box",
+    link: "orders-sales",
   },
   {
-    title: "Chart",
+    title: "Sales",
+    icon: "heroicons-outline:archive-box",
+    link: "sales-breakdown",
+  },
+   {
+    title: "Stock Adjustment",
     icon: "heroicons-outline:chart-bar",
-    link: "#",
+    link: "stock-adjustment",
     child: [
       {
-        childtitle: "Apex chart",
-        childlink: "appex-chart",
+        childtitle: "Stock-In",  
+        childlink: "stock-in",
+        childicon: "heroicons-outline:chart-bar",
       },
       {
-        childtitle: "Chart js",
-        childlink: "chartjs",
+        childtitle: "Stock-Balance",  
+        childlink: "stock-balance",
+        childicon: "heroicons-outline:chart-bar",
       },
-      {
-        childtitle: "Recharts",
-        childlink: "recharts",
-      },
-    ],
+    ]
   },
   {
-    title: "Map",
-    icon: "heroicons-outline:map",
-    link: "map",
+    title: "Members",
+    icon: "heroicons-outline:users",
+    link: "members",
   },
   {
-    title: "Icons",
-    icon: "heroicons-outline:emoji-happy",
-    link: "icons",
+    title: "Report",
+    icon: "heroicons-outline:newspaper",
+    link: "stock-report",
   },
   {
-    title: "Multi Level",
-    icon: "heroicons:share",
-    link: "#",
+    title: "Settings",
+    icon: "heroicons-outline:cog",
+    link: "settings",
     child: [
       {
-        childtitle: "Level 1.1",
-        childlink: "icons",
+        childtitle: "Page Settings",  
+        childlink: "page-settings",
+        childicon: "heroicons-outline:user-circle",
       },
-      {
-        childtitle: "Level 1.2",
-        childlink: "Level-1",
-        multi_menu: [
-          {
-            multiTitle: "Level 2.1",
-            multiLink: "Level-2",
-          },
-          {
-            multiTitle: "Level 2.2",
-            multiLink: "Level-2.3",
-          },
-        ],
-      },
-    ],
+    ]
   },
 ];
 
@@ -624,49 +321,49 @@ export const topMenu = [
           },
         ],
       },
-      {
-        megamenutitle: "Utility",
-        megamenuicon: "heroicons-outline:user",
-        singleMegamenu: [
-          {
-            m_childtitle: "Invoice",
-            m_childlink: "invoice",
-          },
-          {
-            m_childtitle: "Pricing",
-            m_childlink: "pricing",
-          },
+      // {
+      //   megamenutitle: "Utility",
+      //   megamenuicon: "heroicons-outline:user",
+      //   singleMegamenu: [
+      //     {
+      //       m_childtitle: "Invoice",
+      //       m_childlink: "invoice",
+      //     },
+      //     {
+      //       m_childtitle: "Pricing",
+      //       m_childlink: "pricing",
+      //     },
 
-          // {
-          //   m_childtitle: "Testimonial",
-          //   m_childlink: "testimonial",
-          // },
-          {
-            m_childtitle: "FAQ",
-            m_childlink: "faq",
-          },
-          {
-            m_childtitle: "Blank page",
-            m_childlink: "blank-page",
-          },
-          {
-            m_childtitle: "Blog",
-            m_childlink: "blog",
-          },
-          {
-            m_childtitle: "404 page",
-            m_childlink: "error-page",
-          },
-          {
-            m_childtitle: "Coming Soon",
-            m_childlink: "coming-soon",
-          },
-          {
-            m_childtitle: "Under Maintanance page",
-            m_childlink: "under-construction",
-          },
-        ],
-      },
+      //     // {
+      //     //   m_childtitle: "Testimonial",
+      //     //   m_childlink: "testimonial",
+      //     // },
+      //     {
+      //       m_childtitle: "FAQ",
+      //       m_childlink: "faq",
+      //     },
+      //     {
+      //       m_childtitle: "Blank page",
+      //       m_childlink: "blank-page",
+      //     },
+      //     {
+      //       m_childtitle: "Blog",
+      //       m_childlink: "blog",
+      //     },
+      //     {
+      //       m_childtitle: "404 page",
+      //       m_childlink: "/404",
+      //     },
+      //     {
+      //       m_childtitle: "Coming Soon",
+      //       m_childlink: "/coming-soon",
+      //     },
+      //     {
+      //       m_childtitle: "Under Maintanance page",
+      //       m_childlink: "/under-construction",
+      //     },
+      //   ],
+      // },
     ],
   },
 
@@ -723,96 +420,9 @@ export const topMenu = [
 ];
 
 export const notifications = [
-  {
-    title: "Your order is placed",
-    desc: "Amet minim mollit non deser unt ullamco est sit aliqua.",
-
-    image: "/assets/images/all-img/user.png",
-    link: "#",
-  },
-  {
-    title: "Congratulations Darlene  🎉",
-    desc: "Won the monthly best seller badge",
-    unread: true,
-    image: "/assets/images/all-img/user2.png",
-    link: "#",
-  },
-  {
-    title: "Revised Order 👋",
-    desc: "Won the monthly best seller badge",
-
-    image: "/assets/images/all-img/user3.png",
-    link: "#",
-  },
-  {
-    title: "Brooklyn Simmons",
-    desc: "Added you to Top Secret Project group...",
-
-    image: "/assets/images/all-img/user4.png",
-    link: "#",
-  },
 ];
 
 export const message = [
-  {
-    title: "Wade Warren",
-    desc: "Hi! How are you doing?.....",
-    active: true,
-    hasnotifaction: true,
-    notification_count: 1,
-    image: "/assets/images/all-img/user1.png",
-    link: "#",
-  },
-  {
-    title: "Savannah Nguyen",
-    desc: "Hi! How are you doing?.....",
-    active: false,
-    hasnotifaction: false,
-    image: "/assets/images/all-img/user2.png",
-    link: "#",
-  },
-  {
-    title: "Ralph Edwards",
-    desc: "Hi! How are you doing?.....",
-    active: false,
-    hasnotifaction: true,
-    notification_count: 8,
-    image: "/assets/images/all-img/user3.png",
-    link: "#",
-  },
-  {
-    title: "Cody Fisher",
-    desc: "Hi! How are you doing?.....",
-    active: true,
-    hasnotifaction: false,
-    image: "/assets/images/all-img/user4.png",
-    link: "#",
-  },
-  {
-    title: "Savannah Nguyen",
-    desc: "Hi! How are you doing?.....",
-    active: false,
-    hasnotifaction: false,
-    image: "/assets/images/all-img/user2.png",
-    link: "#",
-  },
-  {
-    title: "Ralph Edwards",
-    desc: "Hi! How are you doing?.....",
-    active: false,
-    hasnotifaction: true,
-    notification_count: 8,
-    image: "/assets/images/all-img/user3.png",
-    link: "#",
-  },
-  {
-    title: "Cody Fisher",
-    desc: "Hi! How are you doing?.....",
-    active: true,
-    hasnotifaction: false,
-    image: "/assets/images/all-img/user4.png",
-    link: "#",
-  },
 ];
 
 export const colors = {
@@ -903,25 +513,21 @@ export const bottomFilterLists = [
 
 export const meets = [
   {
-    img: "/assets/images/svg/sk.svg",
     title: "Meeting with client",
     date: "01 Nov 2021",
     meet: "Zoom meeting",
   },
   {
-    img: "/assets/images/svg/path.svg",
     title: "Design meeting (team)",
     date: "01 Nov 2021",
     meet: "Skyp meeting",
   },
   {
-    img: "/assets/images/svg/dc.svg",
     title: "Background research",
     date: "01 Nov 2021",
     meet: "Google meeting",
   },
   {
-    img: "/assets/images/svg/sk.svg",
     title: "Meeting with client",
     date: "01 Nov 2021",
     meet: "Zoom meeting",
@@ -930,28 +536,254 @@ export const meets = [
 
 export const files = [
   {
-    img: "/assets/images/icon/file-1.svg",
     title: "Dashboard.fig",
     date: "06 June 2021 / 155MB",
   },
   {
-    img: "/assets/images/icon/pdf-1.svg",
     title: "Ecommerce.pdf",
     date: "06 June 2021 / 155MB",
   },
   {
-    img: "/assets/images/icon/zip-1.svg",
     title: "Job portal_app.zip",
     date: "06 June 2021 / 155MB",
   },
   {
-    img: "/assets/images/icon/pdf-2.svg",
     title: "Ecommerce.pdf",
     date: "06 June 2021 / 155MB",
   },
   {
-    img: "/assets/images/icon/scr-1.svg",
     title: "Screenshot.jpg",
     date: "06 June 2021 / 155MB",
+  },
+];
+
+// ecommarce data
+
+
+
+export const products = [
+  {
+    category: "men",
+    name: "Classical Black T-Shirt Classical Black T-Shirt",
+    subtitle: "The best cotton black branded shirt.",
+    desc: "The best cotton black branded shirt. The best cotton black branded shirt. The best cotton black branded shirt. The best cotton black branded shirt. The best cotton black branded shirt.",
+    rating: "4.8",
+    price: 489,
+    oldPrice: "$700",
+    percent: "40%",
+    brand: "apple",
+  },
+  {
+    category: "men",
+    name: "Classical Black T-Shirt",
+    subtitle: "The best cotton black branded shirt.",
+    desc: "The best cotton black branded shirt",
+    rating: "4.8",
+    price: 20,
+    oldPrice: "$700",
+    percent: "40%",
+    brand: "apex",
+  },
+  {
+    category: "women",
+    name: "Classical Black T-Shirt",
+    subtitle: "The best cotton black branded shirt.",
+    desc: "The best cotton black branded shirt",
+    rating: "4.8",
+    price: 120,
+    oldPrice: "$700",
+    percent: "40%",
+    brand: "easy",
+  },
+  {
+    category: "women",
+    name: "Classical Black T-Shirt",
+    subtitle: "The best cotton black branded shirt.",
+    desc: "The best cotton black branded shirt",
+    rating: "4.8",
+    price: 70,
+    oldPrice: "$700",
+    percent: "40%",
+    brand: "pixel",
+  },
+  {
+    category: "baby",
+    name: "Classical Black T-Shirt",
+    subtitle: "The best cotton black branded shirt.",
+    desc: "The best cotton black branded shirt",
+    rating: "4.8",
+    price: 30,
+    oldPrice: "$700",
+    percent: "40%",
+    brand: "apex",
+  },
+  {
+    category: "women",
+    name: "Classical Black T-Shirt",
+    subtitle: "The best cotton black branded shirt.",
+    desc: "The best cotton black branded shirt",
+    rating: "4.8",
+    price: 40,
+    oldPrice: "$700",
+    percent: "40%",
+    brand: "apple",
+  },
+  {
+    category: "women",
+    name: "Classical Black T-Shirt",
+    subtitle: "The best cotton black branded shirt.",
+    desc: "The best cotton black branded shirt",
+    rating: "4.8",
+    price: 90,
+    oldPrice: "$700",
+    percent: "40%",
+    brand: "easy",
+  },
+  {
+    category: "women",
+    name: "Classical Black T-Shirt",
+    subtitle: "The best cotton black branded shirt.",
+    desc: "The best cotton black branded shirt",
+    rating: "4.8",
+    price: 80,
+    oldPrice: "$700",
+    percent: "40%",
+    brand: "pixel",
+  },
+  {
+    category: "furniture",
+    name: "Classical Black T-Shirt",
+    subtitle: "The best cotton black branded shirt.",
+    desc: "The best cotton black branded shirt",
+    rating: "4.8",
+    price: 20,
+    oldPrice: "$700",
+    percent: "40%",
+    brand: "samsung",
+  },
+];
+
+export const categories = [
+  { label: "All", value: "all", count: "9724" },
+  { label: "Men", value: "men", count: "1312" },
+  { label: "Women", value: "women", count: "3752" },
+  { label: "Child", value: "child", count: "985" },
+  { label: "Baby", value: "baby", count: "745" },
+  { label: "Footwear", value: "footwear", count: "1280" },
+  { label: "Furniture", value: "furniture", count: "820" },
+  { label: "Mobile", value: "mobile", count: "2460" },
+];
+
+export const brands = [
+  { label: "Apple", value: "apple", count: "9724" },
+  { label: "Apex", value: "apex", count: "1312" },
+  { label: "Easy", value: "easy", count: "3752" },
+  { label: "Pixel", value: "pixel", count: "985" },
+  { label: "Samsung", value: "samsung", count: "2460" },
+];
+
+export const price = [
+  {
+    label: "$0 - $199",
+    value: {
+      min: 0,
+      max: 199,
+    },
+    count: "9724",
+  },
+  {
+    label: "$200 - $449",
+    value: {
+      min: 200,
+      max: 499,
+    },
+    count: "1312",
+  },
+  {
+    label: "$450 - $599",
+    value: {
+      min: 450,
+      max: 599,
+    },
+    count: "3752",
+  },
+  {
+    label: "$600 - $799",
+    value: {
+      min: 600,
+      max: 799,
+    },
+    count: "985",
+  },
+  {
+    label: "$800 & Above",
+    value: {
+      min: 800,
+      max: 1000,
+    },
+    count: "745",
+  },
+];
+export const selectOptions = [
+  {
+    value: "option1",
+    label: "Option 1",
+  },
+  {
+    value: "option2",
+    label: "Option 2",
+  },
+  {
+    value: "option3",
+    label: "Option 3",
+  },
+];
+
+export const payments = [
+  {
+    value: "bkash",
+  },
+  {
+    value: "fatoorah",
+  },
+  {
+    value: "instamojo",
+  },
+  {
+    value: "iyzco",
+  },
+  {
+    value: "nagad",
+  },
+  {
+    value: "ngenious",
+  },
+
+  {
+    value: "payfast",
+  },
+  {
+    value: "payku",
+  },
+  {
+    value: "paypal",
+  },
+  {
+    value: "paytm",
+  },
+  {
+    value: "razorpay",
+  },
+  {
+    value: "ssl",
+  },
+  {
+    value: "stripe",
+  },
+  {
+    value: "truck",
+  },
+  {
+    value: "vougepay",
   },
 ];
