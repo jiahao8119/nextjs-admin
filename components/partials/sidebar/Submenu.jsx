@@ -53,7 +53,7 @@ const Submenu = ({ activeSubmenu, item, i, locationName }) => {
                   locationName={locationName}
                 />
               </div>
-            ) : (
+            ) : subItem.childlink ? (
               <Link href={subItem.childlink}>
                 <span
                   className={`${
@@ -72,6 +72,11 @@ const Submenu = ({ activeSubmenu, item, i, locationName }) => {
                   <span className="flex-1">{subItem.childtitle}</span>
                 </span>
               </Link>
+            ) : (
+              <div className="text-sm flex space-x-3 items-center text-slate-400 cursor-not-allowed">
+                <span className="h-2 w-2 rounded-full border border-slate-400 inline-block flex-none"></span>
+                <span className="flex-1">{subItem.childtitle}</span>
+              </div>
             )}
           </li>
         ))}

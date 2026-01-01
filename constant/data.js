@@ -1,17 +1,13 @@
 export const menuItems = [
-  // {
-  //   isHeadr: true,
-  //   title: "menu",
-  // },
-
   {
     title: "Dashboard",
     icon: "heroicons-outline:home",
-    link: "dashboard",
+    link: "/analytics",
   },
   {
     title: "Inventory",
     icon: "heroicons-outline:collection",
+    link: "/analytics",
     child: [
         {
             childtitle: "Products",
@@ -28,6 +24,7 @@ export const menuItems = [
   {
     title: "Sales System",
     icon: "heroicons-outline:shopping-cart",
+    link: "/analytics",
     child: [
         {
             childtitle: "New Sale",
@@ -86,18 +83,6 @@ export const menuItems = [
       {
         childtitle: "Page Settings",  
         childlink: "page-settings",
-        childicon: "heroicons-outline:user-circle",
-      },
-    ]
-  },
-   {
-    title: "Logout",
-    icon: "heroicons-outline:cog",
-    link: "Logout",
-    child: [
-      {
-        childtitle: "Page lagout",  
-        childlink: "page-logout",
         childicon: "heroicons-outline:user-circle",
       },
     ]

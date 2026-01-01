@@ -11,6 +11,7 @@ const Navmenu = ({ menus }) => {
   const router = useRouter();
   const [activeSubmenu, setActiveSubmenu] = useState(null);
 
+
   const toggleSubmenu = (i) => {
     if (activeSubmenu === i) {
       setActiveSubmenu(null);
@@ -60,7 +61,7 @@ const Navmenu = ({ menus }) => {
               ${locationName === item.link ? "menu-item-active" : ""}`}
           >
             {/* single menu with no childred*/}
-            {!item.child && !item.isHeadr && (
+            {!item.child && !item.isHeadr && item.link && (
               <Link className="menu-link" href={item.link}>
                 <span className="menu-icon flex-grow-0">
                   <Icon icon={item.icon} />
