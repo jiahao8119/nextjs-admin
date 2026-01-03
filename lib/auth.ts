@@ -5,6 +5,7 @@ const JWT_SECRET = process.env.JWT_SECRET || 'blinkcode-erp-secret-key-123';
 export interface AuthContext {
     userId: string;
     allowedOutletIds: string[];
+    role: string;
 }
 
 /**

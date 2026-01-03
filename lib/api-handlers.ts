@@ -8,27 +8,92 @@ import bcrypt from 'bcryptjs';
  */
 export async function handleLogin(request: Request) {
     const { username, password } = await request.json();
-    const userResult = await query('SELECT id, password_hash FROM users WHERE username = $1', [username]);
-    if (userResult.rowCount === 0) return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
+
+    const userResult = await query(
+        'SELECT id, password_hash, role, is_active FROM system_user WHERE username = $1',
+        [username]
+    );
+
+    if (userResult.rowCount === 0) {
+        return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
+    }
+
     const user = userResult.rows[0];
+
+    if (!user.is_active) {
+        return NextResponse.json({ error: 'Account disabled' }, { status: 403 });
+    }
+
     const isValid = await bcrypt.compare(password, user.password_hash);
-    if (!isValid) return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
-    const outletResult = await query('SELECT outlet_id FROM user_outlets WHERE user_id = $1', [user.id]);
-    const allowedOutletIds = outletResult.rows.map(r => r.outlet_id);
-    const token = signToken({ userId: user.id, allowedOutletIds });
-    const response = NextResponse.json({ success: true, user: { id: user.id, username } });
-    response.headers.set('Set-Cookie', `token=${token}; Path=/; HttpOnly; SameSite=Strict; Max-Age=${60 * 60 * 24 * 7}`);
+    if (!isValid) {
+        return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
+    }
+
+    // Optional — guard user_outlets
+    let allowedOutletIds: string[] = [];
+    try {
+        const outletResult = await query(
+            'SELECT outlet_id FROM user_outlets WHERE user_id = $1',
+            [user.id]
+        );
+        allowedOutletIds = outletResult.rows.map(r => r.outlet_id);
+    } catch { }
+
+    const token = signToken({
+        userId: user.id,
+        role: user.role,
+        allowedOutletIds,
+    });
+
+    const response = NextResponse.json({
+        success: true,
+        user: {
+            id: user.id,
+            username,
+            role: user.role,
+        },
+    });
+
+    response.headers.set(
+        'Set-Cookie',
+        `token=${token}; Path=/; HttpOnly; SameSite=Strict; Max-Age=${60 * 60 * 24 * 7}`
+    );
+
     return response;
 }
 
+
 export async function handleMe(request: Request) {
     const token = extractToken(request.headers.get('Authorization') || '');
-    if (!token) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    if (!token) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
     const context = verifyToken(token);
-    const userResult = await query('SELECT id, username, full_name FROM users WHERE id = $1', [context.userId]);
-    if (userResult.rowCount === 0) return NextResponse.json({ error: 'User not found' }, { status: 404 });
-    const outletsResult = await query('SELECT id, name FROM outlets WHERE id = ANY($1)', [context.allowedOutletIds]);
-    return NextResponse.json({ user: userResult.rows[0], outlets: outletsResult.rows, context });
+
+    const userResult = await query(
+        'SELECT id, username, role, is_active FROM system_user WHERE id = $1',
+        [context.userId]
+    );
+
+    if (userResult.rowCount === 0) {
+        return NextResponse.json({ error: 'User not found' }, { status: 404 });
+    }
+
+    let outlets = [];
+    if (context.allowedOutletIds?.length) {
+        const outletsResult = await query(
+            'SELECT id, name FROM outlets WHERE id = ANY($1)',
+            [context.allowedOutletIds]
+        );
+        outlets = outletsResult.rows;
+    }
+
+    return NextResponse.json({
+        user: userResult.rows[0],
+        outlets,
+        context,
+    });
 }
 
 /**
