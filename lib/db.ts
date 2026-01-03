@@ -1,18 +1,38 @@
-import pkg from "pg"
-const { Pool } = pkg
+import { Pool, PoolClient } from 'pg';
 
-declare global {
-  // eslint-disable-next-line no-var
-  var _pgPool: InstanceType<typeof Pool> | undefined
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+});
+
+/**
+ * Execute a single query
+ */
+export async function query(text: string, params?: any[]) {
+  const start = Date.now();
+  const res = await pool.query(text, params);
+  const duration = Date.now() - start;
+  // console.log('executed query', { text, duration, rows: res.rowCount });
+  return res;
 }
 
-export const pool =
-  global._pgPool ??
-  new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: { rejectUnauthorized: false },
-  })
-
-if (process.env.NODE_ENV !== "production") {
-  global._pgPool = pool
+/**
+ * Run operations within a transaction
+ */
+export async function withTransaction<T>(
+  callback: (client: PoolClient) => Promise<T>
+): Promise<T> {
+  const client = await pool.connect();
+  try {
+    await client.query('BEGIN');
+    const result = await callback(client);
+    await client.query('COMMIT');
+    return result;
+  } catch (e) {
+    await client.query('ROLLBACK');
+    throw e;
+  } finally {
+    client.release();
+  }
 }
+
+export default pool;

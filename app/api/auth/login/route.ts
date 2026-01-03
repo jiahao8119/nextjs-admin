@@ -1,75 +1,54 @@
-import { NextResponse } from "next/server"
-import bcrypt from "bcryptjs"
-import jwt from "jsonwebtoken"
-import { pool } from "@/lib/db"
+import { NextResponse } from 'next/server';
+import { query } from '@/lib/db';
+import { signToken } from '@/lib/auth';
+import bcrypt from 'bcryptjs';
 
-export async function POST(req: Request) {
+/**
+ * POST /api/auth/login
+ * Body: { username, password }
+ */
+export async function POST(request: Request) {
   try {
-    const { username, password } = await req.json()
+    const { username, password } = await request.json();
 
-    if (!username || !password) {
-      return NextResponse.json(
-        { error: "Username and password required" },
-        { status: 400 }
-      )
-    }
-
-    const result = await pool.query(
-      `SELECT id, username, password_hash, role, is_active
-       FROM "system_user"
-       WHERE username = $1`,
+    // 1. Find user
+    const userResult = await query(
+      'SELECT id, password_hash FROM users WHERE username = $1',
       [username]
-    )
+    );
 
-    const user = result.rows[0]
-
-    if (!user || !user.is_active) {
-      return NextResponse.json(
-        { error: "Invalid credentials" },
-        { status: 401 }
-      )
+    if (userResult.rowCount === 0) {
+      return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
     }
 
-    const valid = await bcrypt.compare(password, user.password_hash)
-    if (!valid) {
-      return NextResponse.json(
-        { error: "Invalid credentials" },
-        { status: 401 }
-      )
+    const user = userResult.rows[0];
+
+    // 2. Verify password
+    const isValid = await bcrypt.compare(password, user.password_hash);
+    if (!isValid) {
+      return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
     }
 
-    const token = jwt.sign(
-      {
-        user_id: user.id,
-        username: user.username,
-        role: user.role
-      },
-      process.env.JWT_SECRET!,
-      { expiresIn: "7d" }
-    )
+    // 3. Get allowed outlets
+    const outletResult = await query(
+      'SELECT outlet_id FROM user_outlets WHERE user_id = $1',
+      [user.id]
+    );
+    const allowedOutletIds = outletResult.rows.map(r => r.outlet_id);
 
-    const res = NextResponse.json({
-      success: true,
-      user: {
-        id: user.id,
-        username: user.username,
-        role: user.role
-      }
-    })
+    // 4. Sign JWT
+    const token = signToken({
+      userId: user.id,
+      allowedOutletIds
+    });
 
-    res.cookies.set("token", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
-      path: "/"
-    })
+    const response = NextResponse.json({ success: true, user: { id: user.id, username } });
 
-    return res
-  } catch (err: any) {
-    console.error(err)
-    return NextResponse.json(
-      { error: "Server error" },
-      { status: 500 }
-    )
+    // Set cookie for browser-based session if needed, or just return token
+    response.headers.set('Set-Cookie', `token=${token}; Path=/; HttpOnly; SameSite=Strict; Max-Age=${60 * 60 * 24 * 7}`);
+
+    return response;
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
