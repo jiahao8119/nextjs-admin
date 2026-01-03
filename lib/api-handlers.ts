@@ -10,7 +10,7 @@ export async function handleLogin(request: Request) {
     const { username, password } = await request.json();
 
     const userResult = await query(
-        'SELECT id, password_hash, role, is_active FROM system_user WHERE username = $1',
+        'SELECT user_id, password_hash, role, is_active FROM system_user WHERE username = $1',
         [username]
     );
 
@@ -34,13 +34,13 @@ export async function handleLogin(request: Request) {
     try {
         const outletResult = await query(
             'SELECT outlet_id FROM user_outlets WHERE user_id = $1',
-            [user.id]
+            [user.user_id]
         );
         allowedOutletIds = outletResult.rows.map(r => r.outlet_id);
     } catch { }
 
     const token = signToken({
-        userId: user.id,
+        userId: user.user_id,
         role: user.role,
         allowedOutletIds,
     });
@@ -48,7 +48,7 @@ export async function handleLogin(request: Request) {
     const response = NextResponse.json({
         success: true,
         user: {
-            id: user.id,
+            id: user.user_id,
             username,
             role: user.role,
         },
@@ -72,7 +72,7 @@ export async function handleMe(request: Request) {
     const context = verifyToken(token);
 
     const userResult = await query(
-        'SELECT id, username, role, is_active FROM system_user WHERE id = $1',
+        'SELECT user_id, username, role, is_active FROM system_user WHERE user_id = $1',
         [context.userId]
     );
 
@@ -83,7 +83,7 @@ export async function handleMe(request: Request) {
     let outlets = [];
     if (context.allowedOutletIds?.length) {
         const outletsResult = await query(
-            'SELECT id, name FROM outlets WHERE id = ANY($1)',
+            'SELECT outlet_id, name FROM outlets WHERE outlet_id = ANY($1)',
             [context.allowedOutletIds]
         );
         outlets = outletsResult.rows;
