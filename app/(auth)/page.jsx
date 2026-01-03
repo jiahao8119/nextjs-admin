@@ -3,7 +3,6 @@ import Link from "next/link";
 import LoginForm from "@/components/partials/auth/login-form";
 import Social from "@/components/partials/auth/social";
 import useDarkMode from "@/hooks/useDarkMode";
-import Logo from "../../public/assets/images/auth/CMS.png";  
 // image import
 
 const Login = () => {
@@ -14,9 +13,9 @@ const Login = () => {
       <div className="lg-inner-column h-full">
         <div className="left-column relative z-[1] hidden lg:block">
           <div className="max-w-full h-screen flex items-center justify-center px-4">
-            <Link to="/" className="block">
+            <Link href="/" className="block">
               <img 
-                src={Logo} 
+                src="/assets/images/auth/CMS.png"
                 alt="USPizza Logo" 
                 className="mx-auto max-w-[200px] w-full h-auto object-contain"
               />
@@ -28,9 +27,9 @@ const Login = () => {
           <div className="inner-content min-h-screen flex flex-col bg-white dark:bg-slate-800">
             <div className="auth-box flex-1 flex flex-col justify-center px-4 sm:px-6 lg:px-8 py-8">
               <div className="mobile-logo text-center mb-6 lg:hidden">
-                <Link to="/" className="inline-block">
+                <Link href="/" className="inline-block">
                   <img
-                    src={Logo}
+                    src="/assets/images/auth/CMS.png"
                     alt="USPizza Logo"
                     className="mx-auto w-24 h-24 sm:w-32 sm:h-32 object-contain"
                   />

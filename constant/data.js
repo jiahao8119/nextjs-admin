@@ -5,6 +5,11 @@ export const menuItems = [
     link: "/analytics",
   },
   {
+    title: "Real Profit",
+    icon: "heroicons-outline:presentation-chart-line",
+    link: "/profit",
+  },
+  {
     title: "Inventory",
     icon: "heroicons-outline:collection",
     link: "/analytics",

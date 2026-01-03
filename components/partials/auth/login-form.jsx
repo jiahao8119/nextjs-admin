@@ -9,6 +9,8 @@ import { useRouter } from "next/navigation";
 import Checkbox from "@/components/ui/Checkbox";
 import Link from "next/link";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { handleLogin } from "@/components/partials/auth/store";
 
 const schema = yup.object({
   username: yup.string().required("Username is required"),
@@ -16,6 +18,7 @@ const schema = yup.object({
 });
 
 const LoginForm = () => {
+  const dispatch = useDispatch();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [checked, setChecked] = useState(false);
@@ -54,6 +57,8 @@ const LoginForm = () => {
         position: "top-right",
         autoClose: 1200,
       });
+
+      dispatch(handleLogin(true));
 
       // redirect after login
       setTimeout(() => {
