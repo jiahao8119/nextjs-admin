@@ -39,7 +39,7 @@ export async function handleLogin(request: Request) {
     if (!isValid) {
         return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
     }
-    return NextResponse.json({ debugUser: user });
+    // return NextResponse.json({ debugUser: user });
 
 
     const token = signToken({
