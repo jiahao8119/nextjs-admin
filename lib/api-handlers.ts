@@ -10,9 +10,20 @@ export async function handleLogin(request: Request) {
     const { username, password } = await request.json();
 
     const userResult = await query(
-        'SELECT id, username, password_hash, role, is_active FROM system_user WHERE username = $1',
+        `
+  SELECT
+    u.id,
+    u.username,
+    u.password_hash,
+    u.role,
+    u.is_active,
+    u.outlet_id
+  FROM public.system_user u
+  WHERE u.username = $1
+  `,
         [username]
     );
+
 
     if (userResult.rowCount === 0) {
         return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
@@ -28,11 +39,13 @@ export async function handleLogin(request: Request) {
     if (!isValid) {
         return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
     }
+    return NextResponse.json({ debugUser: user });
+
 
     const token = signToken({
         userId: user.id,
         role: user.role,
-        allowedOutletIds: [], // 👈 no outlet logic yet
+        outletId: user.outlet_id,
     });
 
     const response = NextResponse.json({
@@ -63,7 +76,7 @@ export async function handleMe(request: Request) {
     const context = verifyToken(token);
 
     const userResult = await query(
-        'SELECT user_id, username, role, is_active FROM system_user WHERE user_id = $1',
+        'SELECT id, username, role, is_active, outlet_id FROM public.system_user WHERE id = $1',
         [context.userId]
     );
 
@@ -72,10 +85,10 @@ export async function handleMe(request: Request) {
     }
 
     let outlets = [];
-    if (context.allowedOutletIds?.length) {
+    if (context.outletId) {
         const outletsResult = await query(
             'SELECT outlet_id, name FROM outlets WHERE outlet_id = ANY($1)',
-            [context.allowedOutletIds]
+            [context.outletId]
         );
         outlets = outletsResult.rows;
     }
