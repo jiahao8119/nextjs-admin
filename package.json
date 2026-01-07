@@ -42,6 +42,7 @@
     "react-calendar": "^4.8.0",
     "react-chartjs-2": "^5.2.0",
     "react-collapse": "^5.1.1",
+    "react-data-table-component": "^7.7.0",
     "react-dom": "18.2.0",
     "react-dropzone": "^14.2.3",
     "react-flatpickr": "^3.10.13",

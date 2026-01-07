@@ -73,7 +73,7 @@ export const menuItems = [
   {
     title: "Members",
     icon: "heroicons-outline:users",
-    link: "members",
+    link: "member",
   },
   {
     title: "Report",
